@@ -8,22 +8,13 @@ library(Rmpfr)
 library(topicmodels)
 library(RWeka)
 library(ggplot2)
-install.packages("ggthemes")
 library(ggthemes)
 library(stringr)
 library(dplyr)
-install.packages("LDAvis")
-install.packages("servr")
 library(LDAvis)
 library(servr)
 
 
-
-
-setwd("C:/Users/ariel/Desktop/TM-Work")
-strategy_db <- read.csv("Textual Corpus – Strategy Documents.csv", stringsAsFactors = FALSE,  fileEncoding = "latin1")
-head(sen)
-summary(sen)
 
 strategy_db$text <- gsub("http[^\\s]+|www[^\\s]+", " ", strategy_db$text)
 strategy_db$text <- gsub("\\S+@\\S+", " ", strategy_db$text)
@@ -66,9 +57,11 @@ bigram_freq <- colSums(as.matrix(dtm_bigram))
 bigram_freq <- sort(bigram_freq, decreasing = TRUE)
 head(bigram_freq, 200)
 
-#==============#
-#  ווזואליזציה #
-#==============#
+#================#
+#  visualization #
+#                #
+#  ויזואליזציה   #
+#================#
 
 unigram_df <- data.frame(word = names(unigram_freq), frequency = unigram_freq)
 unigram_df$word <- factor(unigram_df$word, levels = unigram_df$word)
@@ -91,7 +84,7 @@ ggplot(unigram_df[1:50, ], aes(x = word, y = frequency)) +
   geom_text(aes(label = frequency), hjust = -0.6 , color = "black", size = 3.5)
 
 
-# Bigram
+# Bigrams#
 
 bigram_df <- data.frame(word = names(bigram_freq), frequency = bigram_freq)
 bigram_df$word <- factor(bigram_df$word, levels = bigram_df$word)
@@ -170,7 +163,7 @@ unigram_tfidf_df <- data.frame(
 )
 unigram_tfidf_df$word <- factor(unigram_tfidf_df$word, levels = rev(unigram_tfidf_df$word))
 
-#===========#
+#==================#
 
 
 ggplot(unigram_tfidf_df[1:50, ], aes(x = word, y = score)) +
@@ -194,6 +187,7 @@ ggplot(unigram_tfidf_df[1:50, ], aes(x = word, y = score)) +
 #  Topic Modeling  #
 #==================#
 
+
 result <- FindTopicsNumber(
   DTM,
   topics = seq(1, 10, by = 1),
@@ -214,7 +208,7 @@ termsByTopic
 posterior(lda)$topics[1:10,]  # עשרת המסמכים הראשונים
 posterior(lda)$terms[,1:10]   # עשרת המונחים הראשונים
 
-#######
+#########
 
 topics <- topics(lda)
 
@@ -230,7 +224,9 @@ topics.labeled <- recode(topics,
 
 table(topics.labeled)
 
+#=========#
 # LDA-vis #
+#=========#
 
 topicmodels2LDAvis <- function(x, ...){
   post <- topicmodels::posterior(x)
@@ -245,24 +241,25 @@ topicmodels2LDAvis <- function(x, ...){
   )
 }
 
-# הפעלת הפונקציה על המודל שלך
 json_vis <- topicmodels2LDAvis(lda)
 
-# הצגה אינטראקטיבית
+# הצגה 
 serVis(json_vis)
 
 output_dir <- "C:/Users/ariel/Desktop/TM-Work/lda_vis"
 dir.create(output_dir, showWarnings = FALSE, recursive = TRUE)
 serVis(json_vis, out.dir = output_dir, open.browser = FALSE)
 
-#===================#
-# השוואה בין מדינות #
-#===================#
+#====================#
+# Country Comparison #
+#                    #
+# השוואה בין מדינות  #
+#====================#
 
 .orig <- read.csv("Textual Corpus – Strategy Documents.csv",
                   stringsAsFactors = FALSE, fileEncoding = "latin1")
 
-# ניסיון לאיתור שם עמודת המדינה
+
 .country_candidates <- tolower(c("Country","COUNTRY","country","מדינה",
                                  "Jurisdiction","State","AuthorityCountry"))
 .colmap <- tolower(names(.orig))
@@ -271,10 +268,12 @@ stopifnot(length(.country_pos) >= 1)
 country_vec <- .orig[[ .country_pos[1] ]]
 country_vec[is.na(country_vec) | trimws(country_vec)== ""] <- "UNKNOWN"
 
-# אימות יישור לשורות ה-DTM/ביגרם (אין שינוי באובייקטים הקיימים)
+# אימות יישור לשורות ה-DTM/ביגרם)
+
 stopifnot(length(country_vec) == dim(DTM)[1], dim(DTM)[1] == dim(dtm_bigram)[1])
 
-# 2) פונקציית עזר קטנה להפקת טבלת טופ-N "מונחים-בעמודות-מדינות"
+# פונקציית עזר קטנה להפקת טבלת טופ-N "מונחים-בעמודות-מדינות"
+
 .build_topN_table <- function(mat_rowsum, N = 20) {
   countries <- rownames(mat_rowsum)
   top_lists <- lapply(seq_len(nrow(mat_rowsum)), function(i){
@@ -292,41 +291,37 @@ stopifnot(length(country_vec) == dim(DTM)[1], dim(DTM)[1] == dim(dtm_bigram)[1])
   out
 }
 
-# 3) יוניגרמים: אגרגציה לפי מדינה והפקת טופ-20 לעמודות
+# יוניגרמים: אגרגציה לפי מדינה והפקת טופ-20 
 mat_uni <- as.matrix(DTM)
 agg_uni <- rowsum(mat_uni, group = factor(country_vec))
 top20_unigrams_by_country <- .build_topN_table(agg_uni, N = 20)
 
-# (אופציונלי) שמירה לקובץ:
-# write.csv(top20_unigrams_by_country, "top20_unigrams_by_country.csv", row.names = FALSE)
 
-# 4) ביגרמים: אגרגציה לפי מדינה והפקת טופ-20 לעמודות
+# ביגרמים: אגרגציה לפי מדינה והפקת טופ-20 
 mat_bi <- as.matrix(dtm_bigram)
 agg_bi <- rowsum(mat_bi, group = factor(country_vec))
 top20_bigrams_by_country <- .build_topN_table(agg_bi, N = 20)
 
-# (אופציונלי) שמירה לקובץ:
-# write.csv(top20_bigrams_by_country, "top20_bigrams_by_country.csv", row.names = FALSE)
 
-# 5) Topic Modeling: ממוצע התפלגות נושאים (theta) לפי מדינה
-#    (נדרש שהאובייקט lda כבר קיים — לפי הקוד המקורי שלך)
-theta <- topicmodels::posterior(lda)$topics   # מסמך × נושא
+# Topic Modeling: לפי מדינה
+
+theta <- topicmodels::posterior(lda)$topics   
 theta_by_country <- rowsum(theta, group = factor(country_vec))
 theta_by_country <- sweep(theta_by_country, 1, rowSums(theta_by_country), FUN = "/")
 
-# (אופציונלי) שמירה:
-# write.csv(theta_by_country, "topic_share_by_country.csv", row.names = TRUE)
 
-# 6) תצוגה מהירה (לא חובה)
+# תצוגה מהירה
 print(head(top20_unigrams_by_country, 20))
 print(head(top20_bigrams_by_country, 20))
 print(theta_by_country)
 
-#=========================#
+#==============================#
 
-#  טבלת נושאים לפי מדינות
+# Table of topics by countries #
 
-#=========================#
+#  טבלת נושאים לפי מדינות      #
+
+#==============================#
 
 
 topic_names <- c(
@@ -342,10 +337,12 @@ topic_names <- c(
 stopifnot(exists("theta_by_country"))
 stopifnot(ncol(theta_by_country) == length(topic_names))
 
-# שם לעמודות לפי שמות הנושאים
+# שמות לעמודות
+
 colnames(theta_by_country) <- topic_names
 
-# טבלה נקייה: מדינה + נושאים (מספרים מעוגלים)
+#  מדינה + נושאים
+
 theta_tbl <- data.frame(
   Country = rownames(theta_by_country),
   round(theta_by_country, 3),
@@ -355,7 +352,7 @@ theta_tbl <- data.frame(
 
 print(theta_tbl)
 
-# גרסת אחוזים (נוח למצגות)
+# גרסת אחוזים
 theta_tbl_pct <- data.frame(
   Country = rownames(theta_by_country),
   round(theta_by_country * 100, 1),
@@ -365,8 +362,9 @@ theta_tbl_pct <- data.frame(
 
 print(theta_tbl_pct)
 
-
+#=========#
 # מפת חום #
+#=========#
 
 stopifnot(exists("theta_by_country"))
 
@@ -394,12 +392,11 @@ if (!exists("hm_df")) {
   hm_df$label   <- sprintf("%.1f%%", hm_df$Share * 100)
 }
 
-# פונקציית גלישת טקסט (ללא חבילות נוספות)
+# פונקציית גלישת טקסט
 wrap_labels <- function(x, width = 22) {
   sapply(x, function(s) paste(strwrap(s, width = width), collapse = "\n"))
 }
 
-library(ggplot2)
 
 p_heat_top_wrapped <- ggplot(hm_df, aes(x = Topic, y = Country, fill = Share)) +
   geom_tile(color = "white", linewidth = 0.3) +
