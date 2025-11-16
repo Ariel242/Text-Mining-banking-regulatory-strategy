@@ -15,7 +15,6 @@ library(LDAvis)
 library(servr)
 
 
-
 strategy_db$text <- gsub("http[^\\s]+|www[^\\s]+", " ", strategy_db$text)
 strategy_db$text <- gsub("\\S+@\\S+", " ", strategy_db$text)
 strategy_db$text <- gsub("[^[:alnum:] ]", " ", strategy_db$text)

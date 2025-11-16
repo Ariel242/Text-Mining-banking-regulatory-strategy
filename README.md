@@ -76,6 +76,48 @@ Using R and the `tm` ecosystem, the text is processed through:
 
 ---
 
+
+## Results and Interpretation
+
+### Topic-level findings
+
+The LDA model with **K = 7 topics** produced coherent and interpretable themes. At a high level, the topics can be grouped into four broad areas:
+
+- **Prudential supervision and risk management** – capital, liquidity, stress testing, risk appetite, ICAAP/ILAAP.
+- **Supervisory strategy and planning** – supervisory priorities, planning cycles, resource allocation, thematic reviews.
+- **Financial services and market development** – competition, innovation, fintech, market structure, cross-border activity.
+- **Consumer protection, conduct and community outcomes** – fair treatment, complaints handling, community obligations, financial inclusion.
+
+Across regulators, prudential and risk-focused topics dominate the corpus, but the relative weight of consumer-oriented vs. prudential language varies by country.
+
+### Heatmap: topic mix by country
+
+A heatmap of topic shares by country highlights clear differences in strategic focus:
+
+- **Euro area (ECB/SSM)** – Strong emphasis on *supervisory strategy and prudential risk*. The strategy documents focus heavily on capital, liquidity, stress testing and the coordination role of the SSM over a large number of banks.
+- **United Kingdom (PRA/BoE)** – High weight on *risk management* and *financial services/markets*. The texts reflect both prudential stability and the goal of positioning the UK as an attractive, competitive and stable financial centre in the post-Brexit environment.
+- **United States (OCC/FDIC/other agencies)** – Marked focus on *consumer protection, compliance and community obligations*. The documents refer frequently to fair treatment, access to banking services and community-oriented outcomes, including topics that appear less central for some of the other regulators.
+- **Canada (OSFI)** – Mixed profile: *prudential stability* alongside *community and ESG-related themes*. Canada is the only jurisdiction in this sample that clearly emphasises diversity, climate-related risks and similar issues.
+- **Australia (APRA)** – Concentrated on *prudential regulation and financial stability*, with relatively less explicit discussion of consumer conduct compared to North America.
+
+Overall, all regulators devote substantial space to prudential risk and stability, but the balance between prudential focus and consumer/community focus differs systematically across jurisdictions.
+
+### Embedding-based clustering (FinBERT)
+
+To complement the topic model, FinBERT embeddings were computed for each strategy text and used to build a cosine-similarity matrix between documents. Hierarchical clustering on these embeddings shows:
+
+- Overall cosine similarities are high (**0.94–0.97**), meaning the regulators largely talk about a similar universe of risks and supervisory themes.
+- The most similar pair in this sample is **EU–Australia**, reflecting very similar prudential language.
+- Two main blocks emerge:
+  - **EU–UK–Australia** – a predominantly **prudential / risk-oriented block**, with strong focus on capital, liquidity, governance and traditional supervisory tools.
+  - **US–Canada** – a more **consumer / community-oriented block**, with relatively higher weight on fairness, community obligations, inclusion and ESG-related themes.
+
+This suggests that while all supervisors share a common base of prudential concerns, North-American authorities place more explicit emphasis on consumer outcomes and community impact, whereas European and Australian authorities emphasise prudential stability and supervisory processes.
+
+
+---
+
+
 ## Repository Structure
 
 A suggested structure for this repository:
