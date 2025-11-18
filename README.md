@@ -18,10 +18,15 @@ Originally, this project was submitted as a term paper in a Text Mining course a
 The corpus consists of English-language strategy and risk-outlook documents downloaded from the official websites of major banking supervisors, including (for example):
 
 - UK – Prudential Regulation Authority (PRA)  
-- Euro Area – European Central Bank (ECB) / SSM  
+- UK – Financial Conduct Authority (FCA)  
+- Euro Area – European Central Bank (ECB) / Single Supervisory Mechanism (SSM)  
+- Australia – Australian Prudential Regulation Authority (APRA)  
 - US – Office of the Comptroller of the Currency (OCC)  
-- US – Federal Deposit Insurance Corporation (FDIC)  
+- US – Board of Governors of the Federal Reserve System (FRB)  
+- US – Consumer Financial Protection Bureau (CFPB)  
 - Canada – Office of the Superintendent of Financial Institutions (OSFI)
+
+A short data guide with links to the original strategy and risk-outlook documents is provided in docs/data_sources.txt.
 
 Each row in the final dataset represents a section or thematic block within a strategy document, with the following key fields:
 
