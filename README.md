@@ -114,13 +114,27 @@ To complement the topic model, FinBERT embeddings were computed for each strateg
 
 This suggests that while all supervisors share a common base of prudential concerns, North-American authorities place more explicit emphasis on consumer outcomes and community impact, whereas European and Australian authorities emphasise prudential stability and supervisory processes.
 
+---
+
+## key Visualizations
+
+### Topic mix by country (LDA)
+![Topic mix by country](figures/topic_by_country_heat_map.png)
+
+### Intertopic distance map (LDAvis)
+![Intertopic distance map](figures/lda_intertopic_distance.png)
+
+### Model selection – choosing the number of topics
+![Topic number diagnostics](figures/topic_number_diagnostics.png)
+
+### Clustering of countries based on FinBERT embeddings
+![FinBERT country clustering](figures/finbert_country_clustering.png)
 
 ---
 
 
 ## Repository Structure
 
-A suggested structure for this repository:
 
 ```text
 .
