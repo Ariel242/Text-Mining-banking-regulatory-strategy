@@ -114,6 +114,9 @@ To complement the topic model, FinBERT embeddings were computed for each strateg
 
 This suggests that while all supervisors share a common base of prudential concerns, North-American authorities place more explicit emphasis on consumer outcomes and community impact, whereas European and Australian authorities emphasise prudential stability and supervisory processes.
 
+> **Note:** Part of the variation in focus across the supervisory authorities reflects the fact that their regulatory responsibilities do not fully overlap within each country’s broader regulatory framework.
+
+
 ---
 
 ## key Visualizations

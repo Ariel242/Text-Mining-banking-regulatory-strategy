@@ -1,0 +1,34 @@
+### Source strategy / risk documents used in the corpus
+
+- **Australia – APRA (Australian Prudential Regulation Authority)**  
+  *Document*: APRA Corporate Plan 2024–25 (2024)  
+  *Link*: https://www.apra.gov.au/apra-corporate-plan-2024-25  
+
+- **Euro Area – ECB Banking Supervision (SSM)**  
+  *Document*: “Navigating the risk landscape: supervisory priorities 2025–27”
+  *Link*: https://www.bankingsupervision.europa.eu/press/blog/2025/html/ssm.blog20250114~7de07435ba.en.html  
+
+- **United Kingdom – FCA (Financial Conduct Authority)**  
+  *Document*: Our strategy 2025 to 2030 – Deepening trust, rebalancing risk, supporting growth, improving lives  
+  *Link (PDF)*: https://www.fca.org.uk/publication/corporate/our-strategy-2025-30.pdf  
+
+- **United Kingdom – PRA / Bank of England**  
+  *Document*: The Prudential Regulation Authority’s approach to banking supervision (July 2023)  
+  *Link (PDF)*: https://www.bankofengland.co.uk/-/media/boe/files/prudential-regulation/approach/banking-approach-2023.pdf  
+
+- **United States – Federal Reserve Board (Board of Governors)**  
+  *Document*: Strategic Plan 2024–27  
+  *Link (PDF)*: https://www.federalreserve.gov/publications/files/2024-2027-gpra-strategic-plan.pdf  
+
+- **United States – CFPB (Consumer Financial Protection Bureau)**  
+  *Document*: CFPB Strategic Plan, FY 2022–2026  
+  *Link (PDF)*: https://files.consumerfinance.gov/f/documents/cfpb_strategic-plan_fy2022-fy2026.pdf  
+
+- **United States – OCC (Office of the Comptroller of the Currency)**  
+  *Document*: Strategic Plan for Fiscal Years 2023–2027  
+  *Link (news release + PDF link inside)*: https://www.occ.gov/news-issuances/news-releases/2022/nr-occ-2022-105.html  
+
+- **Canada – OSFI (Office of the Superintendent of Financial Institutions)**  
+  *Document*: OSFI’s Annual Risk Outlook – Fiscal Year 2024–2025  
+  *Link*: https://www.osfi-bsif.gc.ca/en/about-osfi/reports-publications/osfis-annual-risk-outlook-fiscal-year-2024-2025  
+
